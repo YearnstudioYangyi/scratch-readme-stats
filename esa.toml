@@ -1,0 +1,8 @@
+name = "scratch-readme"
+description = "GenerateGenerate your card for your scratch REAMDE"
+entry = "src/index.js"
+codeVersions = [ ]
+
+[dev]
+port = 18_080
+localUpstream = ""
