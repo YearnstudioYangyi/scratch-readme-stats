@@ -64,9 +64,12 @@ async function handleRequest(request) {
     const id40code = params.get('code') || 0
     const username = params.get('username') || 'Developer';
     const zerocatid = params.get('zc') || 0
-    let rank = (params.get('rank') || 'A').toUpperCase();
-    const themeColor = `#${params.get('color')}` || '#2f80ed';
+    let rank = '';
+    let themeColor = params.get('color') || '#2f80ed';
     // console.log("1")
+    if (!themeColor.startsWith('#')) {
+      themeColor = `#${themeColor}`;
+    }
 
     if (id40code == 0 && zerocatid == 0) {
       return new Response("请提供有效的用户ID参数 (code 或 zc)", {
