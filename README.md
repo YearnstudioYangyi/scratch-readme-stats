@@ -4,13 +4,16 @@
 
 ## 快速生成个人社区信息卡片
 
-在您的Markdown里嵌入如下代码
+在您的Markdown里嵌入如下代码：
 
 ```md
-![提示文字](http://scratch-readme-state.yearnstudio.cn/?code=你的40codeID&username=你的昵称)
+![提示文字](http://scratch-readme-state.yearnstudio.cn/?username=你的昵称&社区参数名1=值&社区参数名2=值)
+
 ```
 
-你会得到下图所示的卡片
+**【社区参数名】** 在下文的 `各个参数` 表格一一对应，倘若你想要将40code的账户列入计算，则应填入 `code=你的40code账户ID`，你还可以添加**更多的**社区账户键值对。
+
+你会得到下图所示的卡片：
 
 ![阳毅 个人卡片](http://scratch-readme-state.yearnstudio.cn/?code=858&zc=125&username=阳毅)
 
@@ -30,7 +33,7 @@
 | momQ     | 希妈阿Q 用户名                         |
 | sbox     | 小盒子社区账户ID                       |
 | xmw      | 小码王社区账户ID                       |
-| kiscode  | 中国少儿编程网账户ID（/coder/**XXX**） |
+| kidscode | 中国少儿编程网账户ID（/coder/**XXX**） |
 | kernyr   | 主核社区 用户名                        |
 | github   | Github 用户名                          |
 | scratch  | Scratch官方社区 用户名                 |
