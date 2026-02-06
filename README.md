@@ -29,6 +29,7 @@
 | gitblock | 稽木世界账户ID                         |
 | momQ     | 希妈阿Q 用户名                         |
 | sbox     | 小盒子社区账户ID                       |
+| xmw      | 小码王社区账户ID                       |
 | kiscode  | 中国少儿编程网账户ID（/coder/**XXX**） |
 | kernyr   | 主核社区 用户名                        |
 | github   | Github 用户名                          |
@@ -60,6 +61,7 @@
 | 希妈阿Q          | 棍母                              |
 | 主核社区         | 话题数/点赞数/转发数              |
 | 中国少儿编程网   | 作品数/点赞数/观看数              |
+| 小码王社区       | 作品数/点赞数/收藏数/查看数       |
 | 小盒子社区(Sbox) | Likes/Stars/Views/PullRequests    |
 | Github           | Watchers/Stars/Forks              |
 
