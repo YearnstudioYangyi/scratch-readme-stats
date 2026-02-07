@@ -1,9 +1,8 @@
 import { parseResponse } from "@engine/util";
-import { JSDOM } from "jsdom";
 
 export async function fetchData(user: string, page: number) {
     const response = await parseResponse<string>(fetch(`https://www.kidscode.cn/coder/${user}`), "text");
-    const { document, Node } = new JSDOM(response).window;
+    const document = new DOMParser().parseFromString(response, "text/html");
     const projects = [...document.querySelector("#cz")?.firstElementChild?.children ?? []]
         .slice(0, -1)
         .map(e => [...e.lastElementChild?.childNodes ?? []]
