@@ -32,12 +32,12 @@ jobs:
             "ZoneId": "'"$ZONE_ID"'",
             "FunctionId": "'"$FUNCTION_ID"'",
             "Remark": "'"$REMARK"'",
-            "Content": "'"$content"'",
-            "Version": "2022-09-01"
+            "Content": "'"$content"'"
           }'
           curl -X POST \
             -H "Host: teo.tencentcloudapi.com" \
             -H "Content-Type: application/json" \
             -H "X-TC-Action: ModifyFunction" \
+            -H "X-TC-Version: 2022-09-01" \
             -d "$payload" \
             https://teo.tencentcloudapi.com
