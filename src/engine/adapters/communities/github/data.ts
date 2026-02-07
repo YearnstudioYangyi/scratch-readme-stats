@@ -1,6 +1,5 @@
 import { parseResponse } from "@engine/util";
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 export function parseMaxPage(response: Response): number {
     const url = response.headers.get("Link")?.split(",")[1].split(";")[0].trim().slice(1, -1);
     if (url) {
