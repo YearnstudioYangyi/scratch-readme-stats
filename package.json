@@ -8,7 +8,8 @@
         "build": "tsup",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "test": "node ."
+        "test": "node .",
+        "deploy": "node dist/scripts/deploy.mjs"
     },
     "keywords": [],
     "author": "",

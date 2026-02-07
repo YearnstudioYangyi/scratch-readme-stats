@@ -2,6 +2,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
     entry: [
+        "./src/scripts/deploy.ts",
         "./src/serverless/edgeone.ts",
         "./src/serverless/esa.ts",
         "./src/test.ts"
