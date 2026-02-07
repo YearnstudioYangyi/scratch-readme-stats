@@ -32,7 +32,8 @@ jobs:
             "ZoneId": "'"$ZONE_ID"'",
             "FunctionId": "'"$FUNCTION_ID"'",
             "Remark": "'"$REMARK"'",
-            "Content": "'"$content"'"
+            "Content": "'"$content"'",
+            "Version": "2022-09-01"
           }'
           curl -X POST \
             -H "Host: teo.tencentcloudapi.com" \
