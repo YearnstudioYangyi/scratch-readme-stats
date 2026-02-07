@@ -1,7 +1,7 @@
 import { parseResponse } from "@engine/util";
 
 export async function fetchData(user: string, page: number) {
-    const response = await parseResponse<string>(fetch(`https://www.kidscode.cn/coder/${user}`), "text");
+    const response = await parseResponse<string>(fetch(`https://www.kidscode.cn/user/coder/id/${user}/m/Home/p/${page}.html`), "text");
     const document = new DOMParser().parseFromString(response, "text/html");
     const projects = [...document.querySelector("#cz")?.firstElementChild?.children ?? []]
         .slice(0, -1)

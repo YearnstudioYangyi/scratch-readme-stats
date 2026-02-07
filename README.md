@@ -31,7 +31,7 @@
 | ccw      | 共创世界账户Oid（/student/**XXX**）    |
 | gitblock | 稽木世界账户ID                         |
 | momQ     | 希妈阿Q 用户名                         |
-| sbox     | 小盒子社区账户 用户名                       |
+| sbox     | 小盒子社区账户 用户名                  |
 | xmw      | 小码王社区账户ID                       |
 | kidscode | 中国少儿编程网账户ID（/coder/**XXX**） |
 | kernyr   | 主核社区 用户名                        |
