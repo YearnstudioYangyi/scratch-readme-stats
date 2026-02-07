@@ -16,11 +16,6 @@ function getDate(timestamp: number) {
     return `${year}-${month}-${day}`;
 }
 
-// 密钥信息从环境变量读取，需要提前在环境变量中设置 TENCENTCLOUD_SECRET_ID 和 TENCENTCLOUD_SECRET_KEY
-// 使用环境变量方式可以避免密钥硬编码在代码中，提高安全性
-// 生产环境建议使用更安全的密钥管理方案，如密钥管理系统(KMS)、容器密钥注入等
-// 请参见：https://cloud.tencent.com/document/product/1278/85305
-// 密钥可前往官网控制台 https://console.cloud.tencent.com/cam/capi 进行获取
 const SECRET_ID = process.env.TENCENTCLOUD_SECRET_ID;
 const SECRET_KEY = process.env.TENCENTCLOUD_SECRET_KEY;
 const TOKEN = "";
