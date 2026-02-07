@@ -1,8 +1,0 @@
-name = "scratch-readme"
-description = "Generate your card for your scratch README"
-entry = "dist/serverless/esa.mjs"
-codeVersions = [ ]
-
-[dev]
-port = 18_080
-localUpstream = ""
