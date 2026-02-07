@@ -27,18 +27,13 @@ jobs:
           FUNCTION_ID: ${{ secrets.FUNCTION_ID }}
           REMARK: ${{ secrets.REMARK }}
         run: |
-          # 读取文件内容并编码为 base64
           content=$(cat dist/serverless/edgeone.mjs | base64 -w 0)
-          
-          # 构建 JSON 负载
           payload='{
             "ZoneId": "'"$ZONE_ID"'",
             "FunctionId": "'"$FUNCTION_ID"'",
             "Remark": "'"$REMARK"'",
             "Content": "'"$content"'"
           }'
-          
-          # 发送请求
           curl -X POST \
             -H "Host: teo.tencentcloudapi.com" \
             -H "Content-Type: application/json" \
