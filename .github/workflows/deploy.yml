@@ -25,9 +25,7 @@ jobs:
         env:
           ZONE_ID: ${{ secrets.ZONE_ID }}
           FUNCTION_ID: ${{ secrets.FUNCTION_ID }}
-          REMARK: ${{ secrets.REMARK }}
           TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
           TENCENTCLOUD_SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
         run: |
-          # Just placeholder
-          # pnpm run deploy
+          pnpm run deploy
