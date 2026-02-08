@@ -27,5 +27,4 @@ jobs:
           FUNCTION_ID: ${{ secrets.FUNCTION_ID }}
           TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
           TENCENTCLOUD_SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
-        run: |
-          pnpm run deploy
+        run: pnpm run deploy
