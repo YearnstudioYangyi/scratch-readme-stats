@@ -14,13 +14,7 @@ const config: ParamInput = {
 };
 
 async function main() {
-    fs.writeFile(
-        "output.svg",
-        await (
-            await esa.fetch(
-                new Request(`https://baidu.com/?${querize(communities)}&${querize(config)}`)
-            )
-        ).text()
-    );
+    const response = await esa.fetch(new Request(`https://baidu.com/?${querize(communities)}&${querize(config)}`));
+    await fs.writeFile("output.svg", await response.text());
 }
 main();
