@@ -10,7 +10,7 @@ const communities: Partial<Record<CommunityField, string>> = {
 const config: ParamInput = {
     username: "TestUser",
     rankSystem: "ccw",
-    theme: "rainbow"
+    theme: "geek"
 };
 
 async function main() {
