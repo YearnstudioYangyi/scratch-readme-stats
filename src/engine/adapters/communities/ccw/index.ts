@@ -34,7 +34,7 @@ export default defineAdapter({
         username: "ccw",
         rank: {
             system: "ccw",
-            store: 10000000000
+            store: 800000
         }
     }
 });
