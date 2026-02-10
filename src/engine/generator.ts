@@ -46,50 +46,51 @@ export function reportRank(profile: UserProfile, store: RankLevelStore): RankRep
     return { score, level, progress };
 }
 export async function generateCard(results: AdaptiveResult[], username: string, setting: CardSetting, store: RankLevelStore, rankSystem: string, request: Request): Promise<GenerateStatus> {
-    // try {
-    if (results.length === 0) {
-        return {
-            result: `请提供至少一个社区的用户ID查询（${getUsernames().join("、")}）`,
-            success: false
-        };
+    try {
+        if (results.length === 0) {
+            return {
+                result: `请提供至少一个社区的用户ID查询（${getUsernames().join("、")}）`,
+                success: false
+            };
+        }
+        const { color } = setting;
+        const { theme } = setting;
+        const promises: Promise<UserProfile>[] = [];
+        for (const result of results) {
+            promises.push((async (adapter) => {
+                try {
+                    return await adapter.getInfo(result.username, request);
+                } catch (e) {
+                    throw new Error(`请求${adapter.communityName}时出错：${e}`);
+                }
+            })(result.adapter));
+        }
+        const profiles = await Promise.all(promises);
+        const totalProfile = profiles.reduce((pre, cur) => ({
+            works: cur.works + pre.works,
+            likes: cur.likes + pre.likes,
+            looks: cur.looks + pre.looks
+        }), {
+            works: 0,
+            likes: 0,
+            looks: 0
+        } satisfies UserProfile);
+        const { level, progress, score } = reportRank(totalProfile, store);
+        const progressPercent = progress;
+        const totalDash = 251.2;
+        const targetOffset = totalDash * (1 - progressPercent);
+        const result = compose(templates[theme], {
+            ...totalProfile,
+            username,
+            rankSystem,
+            rankResult: level,
+            rankScore: Math.round(score),
+            totalDash,
+            targetOffset,
+            themeColor: color,
+        });
+        return { result, success: true };
+    } catch (e) {
+        return { result: `Internal Server Error: ${e}`, success: false };
     }
-    const { color } = setting;
-    const { theme } = setting;
-    const promises: Promise<UserProfile>[] = [];
-    for (const result of results) {
-        promises.push((async (adapter) => {
-            // try {
-            return await adapter.getInfo(result.username, request);
-            // } catch (e) {
-            //     throw new Error(`请求${adapter.communityName}时出错：${e}`);
-            // }
-        })(result.adapter));
-    }
-    const profiles = await Promise.all(promises);
-    const totalProfile = profiles.reduce((pre, cur) => ({
-        works: cur.works + pre.works,
-        likes: cur.likes + pre.likes,
-        looks: cur.looks + pre.looks
-    }), {
-        works: 0,
-        likes: 0,
-        looks: 0
-    } satisfies UserProfile);
-    const { level, progress } = reportRank(totalProfile, store);
-    const progressPercent = progress;
-    const totalDash = 251.2;
-    const targetOffset = totalDash * (1 - progressPercent);
-    const result = compose(templates[theme], {
-        ...totalProfile,
-        username,
-        rankResult: level,
-        totalDash,
-        targetOffset,
-        themeColor: color,
-        rankSystem
-    });
-    return { result, success: true };
-    // } catch (e) {
-    //     return { result: `Internal Server Error: ${e}`, success: false };
-    // }
 }

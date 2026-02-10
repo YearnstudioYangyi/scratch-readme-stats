@@ -21,7 +21,7 @@
     .delay-2 { animation-delay: 0.4s; }
   </style>
   <rect x="0.5" y="0.5" rx="10" width="399" height="149" fill="#0d1117" stroke="#30363d"/>
-  <text x="25" y="35" class="header">Stats of ${username}@${rankSystem}</text>
+  <text x="25" y="35" class="header">${username}@${rankSystem} [${rankScore}]</text>
   <g transform="translate(25, 70)">
     <g class="stat delay-1">
       <text x="0" y="0" class="label">点赞/Star:</text>
