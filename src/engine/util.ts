@@ -43,3 +43,6 @@ export function buildForm(data: Record<string, string | number | boolean>) {
     }
     return result;
 }
+export function querize(data: object) {
+    return Object.entries(data).map(([key, value]) => `${key}=${value}`).join("&");
+}

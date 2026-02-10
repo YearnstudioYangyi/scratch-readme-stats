@@ -14,7 +14,7 @@ import github from "@community/github";
 import kidscode from "@community/kidscode";
 import xmw from "@community/xmw";
 
-export const communities: CommunityAdapter[] = [
+export const communities = [
     fortyCode,
     ccw,
     kernyr,
@@ -29,4 +29,5 @@ export const communities: CommunityAdapter[] = [
     github,
     kidscode,
     xmw
-];
+] as const;
+export type CommunityField = typeof communities[number] extends CommunityAdapter<infer U extends string> ? U : never;

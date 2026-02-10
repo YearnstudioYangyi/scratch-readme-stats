@@ -1,3 +1,5 @@
+import { communities } from "./adapters";
+import { CommunityAdapter } from "./dataHandler";
 import { clamp } from "./util";
 
 export const rankLevels = ["S+", "S", "A++", "A+", "A", "B+", "B", "C", "D", "E"] as const;
@@ -6,6 +8,16 @@ export type RankLevelMaxScore = number //该适配器的最大分数（平均分
 export type RankLevelRating = Record<RankLevelLabels, number> //分级标签->该分级的上限分数
 export type RankLevelArray = { label: RankLevelLabels, max: number }[]; //同上但是数组形式，需要normalize可进行排序
 export type RankLevelStore = RankLevelMaxScore | RankLevelRating | RankLevelArray;
+export type RankSystem = "default" | (
+    typeof communities[number] extends infer R
+    ? R extends CommunityAdapter<string, infer Rank>
+    ? string extends Rank
+    ? never
+    : Rank
+    : never
+    : never
+);
+
 
 export function normalize(store: RankLevelStore): RankLevelArray {
     let result: RankLevelArray = [];
