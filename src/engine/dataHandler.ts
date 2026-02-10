@@ -1,4 +1,5 @@
 import { RankLevelLabels, RankLevelStore, rankStore } from "./rankHandler";
+import { ThemeType } from "./themeConfig";
 
 export interface UserProfile {
     works: number;
@@ -16,9 +17,8 @@ export interface CardStyle {
     targetOffset: number;
     themeColor: string;
 }
-export type Themes = "dark" | "light";
 export interface CardSetting {
-    theme: Themes;
+    theme: ThemeType;
     color: string;
 }
 export interface UserProfileHandler {

@@ -1,6 +1,7 @@
-import { compose, templates } from "./composer";
-import { CardSetting, CommunityAdapter, getUsernames, adapterStore, Themes, UserProfile } from "./dataHandler";
+import { compose } from "./composer";
+import { CardSetting, CommunityAdapter, adapterStore, UserProfile } from "./dataHandler";
 import { calculateProgress, normalize, RankLevelLabels, RankLevelStore, rankStore } from "./rankHandler";
+import { ThemeType } from "./themeConfig";
 
 export interface AdaptiveResult {
     adapter: CommunityAdapter;
@@ -33,26 +34,20 @@ export function reach(request: Request) {
         results,
         username: params.get("username") || "Unnamed Developer",
         color: params.get("color") || "#2f80ed",
-        theme: (params.get("theme") || "light") as Themes,
+        theme: (params.get("theme") || "light") as ThemeType,
         store: rankStore[rankSystem],
         rankSystem
     };
 }
 export function reportRank(profile: UserProfile, store: RankLevelStore): RankReport {
     const { works, likes, looks } = profile;
-    const score: number = likes * 1.2 + works * 0.8 + looks * 0.01;
+    const score = likes * 1.2 + works * 0.8 + looks * 0.01;
     const level: RankLevelLabels = normalize(store).find(level => level.max >= score)?.label || "E";
     const progress = calculateProgress(score, store);
     return { score, level, progress };
 }
 export async function generateCard(results: AdaptiveResult[], username: string, setting: CardSetting, store: RankLevelStore, rankSystem: string, request: Request): Promise<GenerateStatus> {
     try {
-        if (results.length === 0) {
-            return {
-                result: `请提供至少一个社区的用户ID查询（${getUsernames().join("、")}）`,
-                success: false
-            };
-        }
         const { color } = setting;
         const { theme } = setting;
         const promises: Promise<UserProfile>[] = [];
@@ -79,7 +74,7 @@ export async function generateCard(results: AdaptiveResult[], username: string, 
         const progressPercent = progress;
         const totalDash = 251.2;
         const targetOffset = totalDash * (1 - progressPercent);
-        const result = compose(templates[theme], {
+        const result = compose(theme, {
             ...totalProfile,
             username,
             rankSystem,
@@ -91,6 +86,9 @@ export async function generateCard(results: AdaptiveResult[], username: string, 
         });
         return { result, success: true };
     } catch (e) {
-        return { result: `Internal Server Error: ${e}`, success: false };
+        return {
+            result: `Internal Server Error: ${e}`,
+            success: false
+        };
     }
 }

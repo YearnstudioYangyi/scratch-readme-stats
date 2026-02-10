@@ -8,6 +8,7 @@
         "build": "tsup",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
+        "type-checking": "tsc --noEmit",
         "test": "node .",
         "deploy": "node dist/scripts/deploy.js"
     },

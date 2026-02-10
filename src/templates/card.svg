@@ -1,7 +1,7 @@
 <svg width="400" height="150" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
   <style>
     .header { font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif; fill: ${themeColor}; animation: fadeIn 0.8s ease-in-out forwards; }
-    .stat { font: 400 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #434d58; opacity: 0; animation: slideIn 0.5s ease-in-out forwards; }
+    .stat { font: 400 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: ${textColor}; opacity: 0; animation: slideIn 0.5s ease-in-out forwards; }
     .label { font-weight: 600; }
     .rank-text { 
       font: 800 24px 'Segoe UI', Ubuntu, Sans-Serif; fill: ${themeColor}; 
@@ -20,7 +20,7 @@
     .delay-1 { animation-delay: 0.2s; }
     .delay-2 { animation-delay: 0.4s; }
   </style>
-  <rect x="0.5" y="0.5" rx="10" width="399" height="149" fill="#fffefe" stroke="#e4e2e2"/>
+  <rect x="0.5" y="0.5" rx="10" width="399" height="149" fill="${backgroundColor}" stroke="${borderColor}"/>
   <text x="25" y="35" class="header">${username}@${rankSystem} [${rankScore}]</text>
   <g transform="translate(25, 70)">
     <g class="stat delay-1">
@@ -37,7 +37,7 @@
     </g>
   </g>
   <g transform="translate(310, 80)">
-    <circle r="40" cx="0" cy="0" stroke="#eee" stroke-width="8" fill="none" />
+    <circle r="40" cx="0" cy="0" stroke="${progressBarBg}" stroke-width="8" fill="none" />
     <circle r="40" cx="0" cy="0" stroke="${themeColor}" stroke-width="8" fill="none" 
             stroke-linecap="round" class="progress-bar" transform="rotate(-90)" />
     <text x="0" y="8" text-anchor="middle" class="rank-text">${rankResult}</text>

@@ -1,15 +1,16 @@
-import darkTemplate from "@template/dark.svg";
-import lightTemplate from "@template/light.svg";
+import card from "@template/card.svg";
+import { themeConfig, ThemeType } from "./themeConfig";
 import { CardInfo, CardStyle, UserProfile } from "./dataHandler";
 
-export function compose(template: string, data: UserProfile & CardInfo & CardStyle) {
-    let result = template;
-    for (const [key, value] of Object.entries(data)) {
+export function compose(theme: ThemeType, data: UserProfile & CardInfo & CardStyle) {
+    const colors = themeConfig[theme];
+    const dataWithColors = {
+        ...data,
+        ...colors,
+    };
+    let result = card;
+    for (const [key, value] of Object.entries(dataWithColors)) {
         result = result.replaceAll(`\${${key}}`, value.toString());
     }
     return result;
 }
-export const templates = {
-    dark: darkTemplate,
-    light: lightTemplate,
-};
