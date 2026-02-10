@@ -10,7 +10,7 @@ export function compose(theme: ThemeType, data: UserProfile & CardInfo & CardSty
     };
     let result = card;
     for (const [key, value] of Object.entries(dataWithColors)) {
-        result = result.replaceAll(`\${${key}}`, value.toString());
+        result = result.replaceAll(`__${key}__`, value.toString());
     }
     return result;
 }
