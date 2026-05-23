@@ -1,25 +1,64 @@
-import { parseResponse } from "@engine/util";
+export async function fetchGraphQLData(user: string, pat: string) {
+    const query = `
+      query($login: String!, $cursor: String) {
+        repositoryOwner(login: $login) {
+          repositories(first: 100, after: $cursor, ownerAffiliations: [OWNER]) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            nodes {
+              stargazerCount
+              forkCount
+            }
+          }
+        }
+      }
+    `;
 
-export function parseMaxPage(response: Response): number {
-    const url = response.headers.get("Link")?.split(",")[1].split(";")[0].trim().slice(1, -1);
-    if (url) {
-        return Number(new URL(url).searchParams.get("page") ?? 1);
-    } else return 1;
-}
-export async function fetchData(user: string, page: number, pat: string) {
     const headers: Record<string, string> = {
-        Accept: "application/vnd.github.v3+json",
-        Authorization: `token ${pat}`,
+        Authorization: `bearer ${pat}`,
+        "Content-Type": "application/json",
+        "User-Agent": "scratch-readme-stats"
     };
-    const response = await fetch(`https://api.github.com/users/${user}/repos?per_page=30&page=${page}`, { headers });
-    const repos = await parseResponse<{
-        forks_count: number;
-        stargazers_count: number;
-        watchers_count: number;
-        owner: {
-            login: string;
-        };
-    }[]>(response);
-    const maxPage = parseMaxPage(response);
-    return { repos, maxPage };
+
+    let hasNextPage = true;
+    let cursor: string | null = null;
+    let works = 0;
+    let likes = 0;
+    let looks = 0;
+
+    while (hasNextPage) {
+        const response: Response = await fetch("https://api.github.com/graphql", {
+            method: "POST",
+            headers,
+            body: JSON.stringify({ query, variables: { login: user, cursor } }),
+        });
+
+        const data = await response.json() as { message?: string; errors?: { message: string }[]; data?: { repositoryOwner: { repositories: { nodes: { stargazerCount: number; forkCount: number }[]; pageInfo: { hasNextPage: boolean; endCursor: string | null } } } } };
+
+        if (!response.ok) {
+            throw new Error(data.message || "GitHub API request failed");
+        }
+
+        if (data.errors) {
+            throw new Error(data.errors.map((e: { message: string }) => e.message).join(", "));
+        }
+
+        if (!data.data) {
+            throw new Error("No data returned from GitHub API");
+        }
+
+        const repositories = data.data.repositoryOwner.repositories;
+        for (const repo of repositories.nodes) {
+            works++;
+            likes += repo.stargazerCount;
+            looks += repo.stargazerCount * 2 + repo.forkCount;
+        }
+
+        hasNextPage = repositories.pageInfo.hasNextPage;
+        cursor = repositories.pageInfo.endCursor;
+    }
+
+    return { works, likes, looks };
 }
