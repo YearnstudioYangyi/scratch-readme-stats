@@ -11,6 +11,7 @@ export interface CardInfo {
     rankResult: RankLevelLabels;
     rankSystem: string;
     rankScore: number;
+    rankCircleInner: string;
 }
 export interface CardStyle {
     totalDash: number;
@@ -20,12 +21,14 @@ export interface CardStyle {
 export interface CardSetting {
     theme: ThemeType;
     color: string;
+    img?: string;
 }
 export type ParamInput = Partial<{
     rankSystem: RankSystem;
     username: string;
     color: string;
-    theme: ThemeType
+    theme: ThemeType;
+    img: string;
 }>;
 export interface UserProfileHandler {
     (user: string, request: Request): Promise<UserProfile>;

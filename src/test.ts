@@ -10,7 +10,8 @@ const communities: Partial<Record<CommunityField, string>> = {
 const config: ParamInput = {
     username: "TestUser",
     rankSystem: "ccw",
-    theme: "geek"
+    theme: "geek",
+    img: "https://github.com/YearnstudioYangyi.png"
 };
 
 async function main() {

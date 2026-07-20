@@ -9,7 +9,7 @@ export function init() {
     registerAdapter(...communities);
 }
 export async function run(request: Request): Promise<Response> {
-    const { results, username, color, theme, store, rankSystem } = reach(request);
+    const { results, username, color, theme, img, store, rankSystem } = reach(request);
     if (results.length === 0) {
         return buildResponse({
             result: `请提供至少一个社区的用户ID查询（${getUsernames().join("、")}）`,
@@ -28,6 +28,6 @@ export async function run(request: Request): Promise<Response> {
             success: false
         });
     }
-    const status = await generateCard(results, username, { color, theme }, store, rankSystem, request);
+    const status = await generateCard(results, username, { color, theme, img }, store, rankSystem, request);
     return buildResponse(status);
 }
