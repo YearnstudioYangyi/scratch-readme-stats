@@ -2,6 +2,7 @@ import { compose } from "./composer";
 import { CardSetting, CommunityAdapter, adapterStore, UserProfile } from "./dataHandler";
 import { calculateProgress, normalize, RankLevelLabels, RankLevelStore, rankStore } from "./rankHandler";
 import { ThemeType } from "./themeConfig";
+import { fetchImageAsBase64 } from "./util";
 
 export interface AdaptiveResult {
     adapter: CommunityAdapter<string, string | undefined>;
@@ -35,6 +36,7 @@ export function reach(request: Request) {
         username: params.get("username") || "Unnamed Developer",
         color: params.get("color") || "#2f80ed",
         theme: (params.get("theme") || "light") as ThemeType,
+        img: params.get("img") || undefined,
         store: rankStore[rankSystem],
         rankSystem
     };
@@ -49,7 +51,7 @@ export function reportRank(profile: UserProfile, store: RankLevelStore): RankRep
 export async function generateCard(results: AdaptiveResult[], username: string, setting: CardSetting, store: RankLevelStore, rankSystem: string, request: Request): Promise<GenerateStatus> {
     try {
         const { color } = setting;
-        const { theme } = setting;
+        const { theme, img } = setting;
         const promises: Promise<UserProfile>[] = [];
         for (const result of results) {
             promises.push((async (adapter) => {
@@ -74,12 +76,31 @@ export async function generateCard(results: AdaptiveResult[], username: string, 
         const progressPercent = progress;
         const totalDash = 251.2;
         const targetOffset = totalDash * (1 - progressPercent);
+
+        let rankCircleInner = `<text x="0" y="8" text-anchor="middle" class="rank-text">\n      ${level}\n    </text>`;
+
+        if (img) {
+            const base64Image = await fetchImageAsBase64(img);
+            if (base64Image) {
+                rankCircleInner = `
+                    <defs>
+                        <clipPath id="avatar-clip">
+                            <circle cx="0" cy="0" r="32" />
+                        </clipPath>
+                    </defs>
+                    <image href="${base64Image}" x="-32" y="-32" width="64" height="64" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatar-clip)" opacity="0" class="avatar-img" style="animation: zoomIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1.2s;" />
+                    <text x="24" y="24" text-anchor="middle" class="rank-badge">${level}</text>
+                `;
+            }
+        }
+
         const result = compose(theme, {
             ...totalProfile,
             username,
             rankSystem,
             rankResult: level,
             rankScore: Math.round(score),
+            rankCircleInner,
             totalDash,
             targetOffset,
             themeColor: color,
