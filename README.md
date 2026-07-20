@@ -7,7 +7,7 @@
 在您的Markdown里嵌入如下代码：
 
 ```md
-![提示文字](http://scratch-readme-state.yearnstudio.cn/?username=你的昵称&社区参数名1=值&社区参数名2=值)
+![提示文字](https://screadme.yearnstudio.cn/?code=858&zc=125&username=阳毅)
 
 ```
 
@@ -15,7 +15,7 @@
 
 你会得到下图所示的卡片：
 
-![阳毅 个人卡片](http://scratch-readme-state.yearnstudio.cn/?code=858&zc=125&username=阳毅)
+![阳毅 个人卡片](https://screadme.yearnstudio.cn/?code=858&zc=125&username=阳毅)
 
 ---
 
@@ -81,11 +81,11 @@
 
 ## 线路
 
-### ESA边缘函数
+### ~~ESA边缘函数(已弃用)~~
 
-```plain
-http://scratch-readme-state.yearnstudio.cn
-```
+您必须迁移至下方线路
+
+现在此线路会被重定向至下方线路, 可能造成比较大的渲染延迟
 
 ### EdgeOne边缘函数(荐)
 >
