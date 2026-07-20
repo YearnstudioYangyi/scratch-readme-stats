@@ -21,12 +21,12 @@ export interface CardSetting {
     theme: ThemeType;
     color: string;
 }
-export interface ParamInput extends Partial<{
+export type ParamInput = Partial<{
     rankSystem: RankSystem;
     username: string;
     color: string;
     theme: ThemeType
-}> { }
+}>;
 export interface UserProfileHandler {
     (user: string, request: Request): Promise<UserProfile>;
 }
@@ -42,11 +42,11 @@ export interface CommunityAdapter<U extends string = string, R extends string | 
     };
 }
 
-export const adapterStore: Record<string, CommunityAdapter> = {};
-export function defineAdapter<U extends string, R extends string>(data: CommunityAdapter<U, R>) {
+export const adapterStore: Record<string, CommunityAdapter<string, string | undefined>> = {};
+export function defineAdapter<U extends string, R extends string | undefined = undefined>(data: CommunityAdapter<U, R>) {
     return data;
 }
-export function registerAdapter(...adapters: CommunityAdapter[]) {
+export function registerAdapter(...adapters: CommunityAdapter<string, string | undefined>[]) {
     for (const adapter of adapters) {
         adapterStore[adapter.communityName] = adapter;
         if (adapter.fields.rank && adapter.fields.rank.system) {

@@ -4,7 +4,7 @@ import { calculateProgress, normalize, RankLevelLabels, RankLevelStore, rankStor
 import { ThemeType } from "./themeConfig";
 
 export interface AdaptiveResult {
-    adapter: CommunityAdapter;
+    adapter: CommunityAdapter<string, string | undefined>;
     username: string;
 }
 export interface GenerateStatus {
