@@ -1,115 +1,167 @@
-﻿<svg width="400" height="175" viewBox="0 0 400 175" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <style>
-        .header {
-            font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
-            fill: __themeColor__;
-            animation: fadeIn 0.8s ease-in-out forwards;
-        }
+﻿<svg
+  width="400"
+  height="175"
+  viewBox="0 0 400 175"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <style>
+    .header {
+      font:
+        600 18px "Segoe UI",
+        Ubuntu,
+        Sans-Serif;
+      fill: __themeColor__;
+      animation: fadeIn 0.8s ease-in-out forwards;
+    }
 
-        .stat {
-            font: 400 14px 'Segoe UI', Ubuntu, Sans-Serif;
-            fill: __textColor__;
-            opacity: 0;
-            animation: slideIn 0.5s ease-in-out forwards;
-        }
+    .stat {
+      font:
+        400 14px "Segoe UI",
+        Ubuntu,
+        Sans-Serif;
+      fill: __textColor__;
+      opacity: 0;
+      animation: slideIn 0.5s ease-in-out forwards;
+    }
 
-        .label {
-            font-weight: 600;
-        }
+    .label {
+      font-weight: 600;
+    }
 
-        .rank-text {
-            font: 800 24px 'Segoe UI', Ubuntu, Sans-Serif;
-            fill: __themeColor__;
-            opacity: 0;
-            transform-box: fill-box;
-            transform-origin: center;
-            animation: zoomIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1.2s;
-        }
+    .rank-text {
+      font:
+        800 24px "Segoe UI",
+        Ubuntu,
+        Sans-Serif;
+      fill: __themeColor__;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: zoomIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards
+        1.2s;
+    }
 
-        .progress-bar {
-            stroke-dasharray: __totalDash__;
-            stroke-dashoffset: __totalDash__;
-            animation: progress 1.2s ease-in-out forwards 0.4s;
-        }
+    .progress-bar {
+      stroke-dasharray: __totalDash__;
+      stroke-dashoffset: __totalDash__;
+      animation: progress 1.2s ease-in-out forwards 0.4s;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
 
-            to {
-                opacity: 1;
-            }
-        }
+      to {
+        opacity: 1;
+      }
+    }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-15px);
-            }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
 
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
 
-        @keyframes progress {
-            to {
-                stroke-dashoffset: __targetOffset__;
-            }
-        }
+    @keyframes progress {
+      to {
+        stroke-dashoffset: __targetOffset__;
+      }
+    }
 
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.5);
-            }
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.5);
+      }
 
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-        .delay-1 {
-            animation-delay: 0.2s;
-        }
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
 
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
-    </style>
-    <rect x="0.5" y="0.5" rx="10" width="399" height="174" fill="__backgroundColor__" stroke="__borderColor__" />
-    <text x="25" y="35" class="header">__username__@__rankSystem__ [__rankScore__]</text>
-    <g transform="translate(25, 70)">
-        <g class="stat delay-1">
-            <text x="0" y="0" class="label">点赞/Star:</text>
-            <text x="110" y="0">__likes__</text>
-        </g>
-        <g class="stat delay-2">
-            <text x="0" y="30" class="label">作品数:</text>
-            <text x="110" y="30">__works__</text>
-        </g>
-        <g class="stat delay-2">
-            <text x="0" y="60" class="label">查看数:</text>
-            <text x="110" y="60">__looks__</text>
-        </g>
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+  </style>
+  <rect
+    x="0.5"
+    y="0.5"
+    rx="10"
+    width="399"
+    height="174"
+    fill="__backgroundColor__"
+    stroke="__borderColor__"
+  />
+  <text x="25" y="35" class="header">
+    __username__@__rankSystem__ [__rankScore__]
+  </text>
+  <g transform="translate(25, 70)">
+    <g class="stat delay-1">
+      <text x="0" y="0" class="label">点赞/Star:</text>
+      <text x="110" y="0">__likes__</text>
     </g>
-    <g transform="translate(310, 80)">
-        <circle r="40" cx="0" cy="0" stroke="__progressBarBg__" stroke-width="8" fill="none" />
-        <circle r="40" cx="0" cy="0" stroke="__themeColor__" stroke-width="8" fill="none" stroke-linecap="round"
-            class="progress-bar" transform="rotate(-90)" />
-        <text x="0" y="8" text-anchor="middle" class="rank-text">__rankResult__</text>
+    <g class="stat delay-2">
+      <text x="0" y="30" class="label">作品数:</text>
+      <text x="110" y="30">__works__</text>
     </g>
-    <g transform="translate(25, 145)" class="stat delay-2">
-        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-        <text x="22" y="12" style="font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif;">YearnstudioYangyi/scratch-readme-stats</text>
+    <g class="stat delay-2">
+      <text x="0" y="60" class="label">查看数:</text>
+      <text x="110" y="60">__looks__</text>
     </g>
-    <g transform="translate(25, 145)">
-        <g class="stat delay-2">
-            <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-            <text x="22" y="12" style="font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif;">YearnstudioYangyi/scratch-readme-stats</text>
-        </g>
-    </g>
+  </g>
+  <g transform="translate(310, 80)">
+    <circle
+      r="40"
+      cx="0"
+      cy="0"
+      stroke="__progressBarBg__"
+      stroke-width="8"
+      fill="none"
+    />
+    <circle
+      r="40"
+      cx="0"
+      cy="0"
+      stroke="__themeColor__"
+      stroke-width="8"
+      fill="none"
+      stroke-linecap="round"
+      class="progress-bar"
+      transform="rotate(-90)"
+    />
+    <text x="0" y="8" text-anchor="middle" class="rank-text">
+      __rankResult__
+    </text>
+  </g>
+  <g transform="translate(25, 145)" class="stat delay-2">
+    <path
+      fill-rule="evenodd"
+      d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+    />
+    <text
+      x="22"
+      y="12"
+      style="
+        font:
+          400 12px &quot;Segoe UI&quot;,
+          Ubuntu,
+          Sans-Serif;
+      "
+    >
+      由YearnstudioYangyi/scratch-readme-stats生成
+    </text>
+  </g>
 </svg>
