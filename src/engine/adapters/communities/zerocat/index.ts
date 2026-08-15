@@ -3,7 +3,7 @@ import { defineAdapter } from "@engine/dataHandler";
 export default defineAdapter({
     communityName: "ZeroCat",
     async getInfo(user) {
-        const response = await fetch(`https://api.zcservice.houlang.cloud/searchapi?search_userid=${encodeURIComponent(user)}&search_orderby=view_up&search_state=public&curr=1&limit=10000`);
+        const response = await fetch(`https://api.zerocat.dev/searchapi?search_userid=${encodeURIComponent(user)}&search_orderby=view_up&search_state=public&curr=1&limit=10000`);
         if (!response.ok) {
             throw new Error(`Status: ${response.status}`);
         }
