@@ -52,17 +52,19 @@ export async function generateCard(results: AdaptiveResult[], username: string, 
     try {
         const { color } = setting;
         const { theme, img } = setting;
-        const promises: Promise<UserProfile>[] = [];
+        const promises: Promise<UserProfile | null>[] = [];
         for (const result of results) {
             promises.push((async (adapter) => {
                 try {
                     return await adapter.getInfo(result.username, request);
                 } catch (e) {
-                    throw new Error(`请求${adapter.communityName}时出错：${e}`);
+                    console.warn(`请求${adapter.communityName}时出错，已忽略：${e}`);
+                    return null;
                 }
             })(result.adapter));
         }
-        const profiles = await Promise.all(promises);
+        const resolvedProfiles = await Promise.all(promises);
+        const profiles = resolvedProfiles.filter((p): p is UserProfile => p !== null);
         const totalProfile = profiles.reduce((pre, cur) => ({
             works: cur.works + pre.works,
             likes: cur.likes + pre.likes,
